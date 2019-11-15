@@ -2,14 +2,17 @@ package chess;
 
 import boardgame.Board;
 import boardgame.Position;
+import chess.pieces.Bishop;
 import chess.pieces.King;
+import chess.pieces.Knight;
 import chess.pieces.Pawn;
+import chess.pieces.Queen;
 import chess.pieces.Rook;
 
 public class ChessMatch {
 	private Board board;
 
-	public ChessMatch() {
+	public ChessMatch(){
 		super();
 		this.board = new Board(8, 8);
 		initialSetUp();
@@ -35,5 +38,17 @@ public class ChessMatch {
 			this.board.placePiece(new Pawn(this.board, Color.WHITE), new Position(1, i));
 			this.board.placePiece(new Pawn(this.board, Color.BLACK), new Position(6, i));
 		}
+		this.board.placePiece(new Queen(this.board, Color.WHITE), new Position(0, 3));
+		this.board.placePiece(new Queen(this.board, Color.BLACK), new Position(7, 3));
+		
+		this.board.placePiece(new Bishop(this.board, Color.WHITE), new Position(0, 2));
+		this.board.placePiece(new Bishop(this.board, Color.BLACK), new Position(7, 2));
+		this.board.placePiece(new Bishop(this.board, Color.WHITE), new Position(0, 5));
+		this.board.placePiece(new Bishop(this.board, Color.BLACK), new Position(7, 5));
+		
+		this.board.placePiece(new Knight(this.board, Color.WHITE), new Position(0, 1));
+		this.board.placePiece(new Knight(this.board, Color.BLACK), new Position(7, 6));
+		this.board.placePiece(new Knight(this.board, Color.WHITE), new Position(0, 6));
+		this.board.placePiece(new Knight(this.board, Color.BLACK), new Position(7, 1));
 	}
 }

@@ -2,6 +2,7 @@ package chess;
 
 import boardgame.Board;
 import boardgame.Piece;
+import exception.ChessException;
 
 public class ChessPiece extends Piece{
 	private Color color;
@@ -21,7 +22,7 @@ public class ChessPiece extends Piece{
 		return moveCount;
 	}
 
-	public ChessPosition getChessPosition() {
+	public ChessPosition getChessPosition() throws ChessException {
 		return new ChessPosition(super.getPosition().getRow(), super.getPosition().getColumn());
 	}
 	

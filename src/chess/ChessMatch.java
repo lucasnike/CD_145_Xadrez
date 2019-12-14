@@ -8,11 +8,12 @@ import chess.pieces.Knight;
 import chess.pieces.Pawn;
 import chess.pieces.Queen;
 import chess.pieces.Rook;
+import exception.ChessException;
 
 public class ChessMatch {
 	private Board board;
 
-	public ChessMatch(){
+	public ChessMatch() throws ChessException{
 		super();
 		this.board = new Board(8, 8);
 		initialSetUp();
@@ -27,28 +28,34 @@ public class ChessMatch {
 		}
 		return mat;
 	}
-	private void initialSetUp() {
-		this.board.placePiece(new Rook(this.board, Color.WHITE), new Position(0, 0));
-		this.board.placePiece(new Rook(this.board, Color.WHITE), new Position(0, 7));
-		this.board.placePiece(new Rook(this.board, Color.BLACK), new Position(7, 0));
-		this.board.placePiece(new Rook(this.board, Color.BLACK), new Position(7, 7));
-		this.board.placePiece(new King(this.board, Color.WHITE), new Position(0, 4));
-		this.board.placePiece(new King(this.board, Color.BLACK), new Position(7, 4));
+	
+	private void placeNewPiece(char column, int row, ChessPiece p) throws ChessException {
+		board.placePiece(p, new ChessPosition(row, column).toPosition());
+	}
+	
+	private void initialSetUp() throws ChessException {
+		placeNewPiece('a', 8,new Rook(this.board, Color.BLACK));
+		placeNewPiece('h', 8,new Rook(this.board, Color.BLACK));
+		placeNewPiece('a', 1,new Rook(this.board, Color.WHITE));
+		placeNewPiece('h', 1,new Rook(this.board, Color.WHITE));
+		placeNewPiece('d', 1,new King(this.board, Color.WHITE));
+		placeNewPiece('d', 8,new King(this.board, Color.BLACK));
 		for (int i = 0; i < 8; i++) {
-			this.board.placePiece(new Pawn(this.board, Color.WHITE), new Position(1, i));
-			this.board.placePiece(new Pawn(this.board, Color.BLACK), new Position(6, i));
+			this.board.placePiece(new Pawn(this.board, Color.BLACK), new Position(1, i));
+			this.board.placePiece(new Pawn(this.board, Color.WHITE), new Position(6, i));
 		}
-		this.board.placePiece(new Queen(this.board, Color.WHITE), new Position(0, 3));
-		this.board.placePiece(new Queen(this.board, Color.BLACK), new Position(7, 3));
+		placeNewPiece('e', 1,new Queen(this.board, Color.WHITE));
+		placeNewPiece('e', 8,new Queen(this.board, Color.BLACK));
 		
-		this.board.placePiece(new Bishop(this.board, Color.WHITE), new Position(0, 2));
-		this.board.placePiece(new Bishop(this.board, Color.BLACK), new Position(7, 2));
-		this.board.placePiece(new Bishop(this.board, Color.WHITE), new Position(0, 5));
-		this.board.placePiece(new Bishop(this.board, Color.BLACK), new Position(7, 5));
+		placeNewPiece('c', 1,new Bishop(this.board, Color.WHITE));
+		placeNewPiece('c', 8,new Bishop(this.board, Color.BLACK));
+		placeNewPiece('f', 1,new Bishop(this.board, Color.WHITE));
+		placeNewPiece('f', 8,new Bishop(this.board, Color.BLACK));
 		
-		this.board.placePiece(new Knight(this.board, Color.WHITE), new Position(0, 1));
-		this.board.placePiece(new Knight(this.board, Color.BLACK), new Position(7, 6));
-		this.board.placePiece(new Knight(this.board, Color.WHITE), new Position(0, 6));
-		this.board.placePiece(new Knight(this.board, Color.BLACK), new Position(7, 1));
+		placeNewPiece('b', 1,new Knight(this.board, Color.WHITE));
+		placeNewPiece('b', 8,new Knight(this.board, Color.BLACK));
+		placeNewPiece('g', 1,new Knight(this.board, Color.WHITE));
+		placeNewPiece('g', 8,new Knight(this.board, Color.BLACK));
+
 	}
 }
